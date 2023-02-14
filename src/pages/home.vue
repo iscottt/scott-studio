@@ -26,13 +26,13 @@
     </div>
     <section id="skill">
       <div class="scott-title">
-        <p class="title">技能</p>
+        <p class="title" data-text="SKILL">技能</p>
       </div>
       <p class="section-info">
         多年前端开发经验，熟练使用vue、react、nodejs、webpack、typescript、git等前端技术栈，熟悉前端工程化、组件化、模块化开发，熟悉前端性能优化、前端安全、前端工程化、前端自动化、前端架构等相关知识。
       </p>
       <div class="skill-list">
-        <div class="favlink" v-for="item in skillList" :key="item.title">
+        <div class="fav-link" v-for="item in skillList" :key="item.title">
           <div class="icon" :style="{ background: item.bg }">
             <img :src="`https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/${item.title}.png`" alt="" />
           </div>
@@ -45,6 +45,14 @@
           </div>
         </div>
       </div>
+    </section>
+    <section id="project">
+      <div class="scott-title">
+        <p class="title" data-text="PROJECT">项目</p>
+      </div>
+      <p class="section-info">
+        List of projects.
+      </p>
     </section>
   </div>
 </template>
@@ -276,7 +284,7 @@ section {
       }
 
       &::before {
-        content: "SKILL";
+        content: attr(data-text);
         position: absolute;
         top: -100%;
         opacity: 0.4;
@@ -307,7 +315,7 @@ section {
     grid-template-columns: repeat(5, 1fr);
     width: 100%;
 
-    .favlink {
+    .fav-link {
       padding: 14px;
       border-radius: 6px;
       display: flex;
@@ -370,7 +378,7 @@ section {
         }
 
         .desc {
-          width: 80%;
+          width: 70%;
           height: 50px;
           position: relative;
           display: flex;
