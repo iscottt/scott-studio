@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <div class="home-wrapper">
+    <section class="home-wrapper" id="home">
       <header>
         <ul class="menu">
           <li><a href="#home">首页</a></li>
           <li><a href="#skill">技能</a></li>
           <li><a href="#project">项目</a></li>
-          <li><a href="#experience">经历</a></li>
+          <li><a href="https://blog.scott-studio.cn" target="_blank">博客</a></li>
           <li><a href="#about">关于我</a></li>
         </ul>
       </header>
@@ -14,16 +14,18 @@
         <p class="title">SCOTT STUDIO</p>
         <p class="desc">不知名前端攻城狮，分享编程经验和技术干货。</p>
       </div>
-      <div class="more">
+      <a href="#skill" class="more">
+        <!-- <div class="more"> -->
         <div class="text">SCROLL</div>
         <div class="scrollIndicator__arrow">
           <div data-ui="leftLine" class="leftLine" style="transform: scale(1.5, 1);"></div>
           <div data-ui="rightLine" class="rightLine" style="transform: scale(1, 1.5);"></div>
         </div>
-      </div>
+      </a>
+      <!-- </div> -->
       <div class="top-bar"></div>
       <div class="bottom-bar"></div>
-    </div>
+    </section>
     <section id="skill">
       <div class="scott-title">
         <p class="title" data-text="SKILL">技能</p>
@@ -38,10 +40,10 @@
           </div>
           <div class="info">
             <p class="title">{{ item.title }}</p>
-            <div class="desc">
+            <!-- <div class="desc">
               <p class="fill" :style="{ width: item.percent + '%' }"></p>
               <p class="out"></p>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -51,9 +53,39 @@
         <p class="title" data-text="PROJECT">项目</p>
       </div>
       <p class="section-info">
-        List of projects.
+        个人项目，包括博客、小游戏、工具等。其中不包含工作项目，工作项目不便公开。开源项目欢迎star。
       </p>
+      <div class="skill-list project-list">
+        <div class="project-item" v-for="item in projectList" :key="item.title">
+          <img :src="item.cover" alt="">
+          <div class="item-info">
+            <div class="info-group">
+              <p class="title">{{ item.title }}</p>
+              <p class="desc">{{ item.desc }}</p>
+            </div>
+            <a :href="item.link" target="_blank" class="action">访问</a>
+          </div>
+        </div>
+      </div>
     </section>
+    <section id="about">
+      <div class="scott-title">
+        <p class="title" data-text="ABOUT">关于我</p>
+      </div>
+      <main>
+        <div class="about-info">
+          <p>你好，很高兴认识你👋</p>
+          <p class="name-title">我叫彭锐南 SCOTT</p>
+          <p>是一名 前端攻城狮、独立开发者、博主。</p>
+          <p>喜欢唱歌、游戏、看电影，热爱生活，热爱编程。</p>
+        </div>
+      </main>
+    </section>
+    <footer>
+      <p class="info">Copyright © 2022-2023 SCOTT-STUDIO 保留所有权利。</p>
+      <p class="info"><a
+          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36032102000025">赣ICP备19001528号-1</a> </p>
+    </footer>
   </div>
 </template>
 
@@ -70,22 +102,37 @@ const skillList = [
   { title: "git", percent: 70, bg: "#8f55ba" },
   { title: "ps", percent: 70, bg: "#001e36" },
 ]
+
+const projectList = [
+  { cover: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/peeps-avatar%20%281%29.png", title: "scott-studio", desc: "我的个人博客", link: "https://blog.scott-studio.cn" },
+  { cover: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/peeps-avatar-2.png", title: "Salary", desc: "nvPress博客主题，去往心中的远方。", link: "https://blog.scott-studio.cn/salary" },
+  { cover: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/peeps-avatar-4.png", title: "vscode-settings", desc: "我的VSCode个人配置", link: "https://github.com/iscottt/vscode-settings" },
+  { cover: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/peeps-avatar-3.png", title: "wechat-push", desc: "微信早安推送nodejs服务", link: "https://github.com/iscottt/wechat-push" },
+  { cover: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/peeps-avatar-1.png", title: "Duang了个Duang", desc: "仿羊了个羊小游戏", link: "https://github.com/iscottt/zlegez" },
+  { cover: "https://ethanwp.oss-cn-shenzhen.aliyuncs.com/blog/peeps-avatar-5.png", title: "scott-linksubmit", desc: "nvPress百度收录插件，方便快捷的将你的文章提交到百度收录", link: "https://github.com/iscottt/scott-linksubmit" },
+]
+
 </script>
 
 <style scoped lang="less">
 .container {
   width: 100%;
   height: 100%;
+  /* 在父容器上面使用 scroll-snap-type 属性 */
+  scroll-snap-type: y mandatory;
+  overflow: auto;
+  scroll-behavior: smooth;
 }
 
 .home-wrapper {
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   background: linear-gradient(131deg, #4E5868 -19%, #273344 66%);
   position: relative;
+  /* 在需要滚动的容器上使用 scroll-snap-align 属性 */
+  scroll-snap-align: start;
+  transition: .35s;
 
   .top-bar,
   .bottom-bar {
@@ -112,7 +159,7 @@ const skillList = [
   header {
     width: 100%;
     height: 100px;
-    position: absolute;
+    position: fixed;
     font-family: 'moonbridge';
     top: 0;
     right: 0;
@@ -255,6 +302,9 @@ section {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-evenly;
+  /* 在需要滚动的容器上使用 scroll-snap-align 属性 */
+  scroll-snap-align: start;
+  transition: .35s;
 
   .scott-title {
     margin: 20px 0;
@@ -315,6 +365,11 @@ section {
     grid-template-columns: repeat(5, 1fr);
     width: 100%;
 
+    &.project-list {
+
+      grid-template-columns: repeat(3, 1fr);
+    }
+
     .fav-link {
       padding: 14px;
       border-radius: 6px;
@@ -323,6 +378,7 @@ section {
       justify-content: center;
       flex-direction: column;
       position: relative;
+      margin-bottom: 20px;
       cursor: pointer;
 
       .icon {
@@ -362,7 +418,6 @@ section {
           margin: 0;
           margin-bottom: 10px;
           transition: 0.35s;
-          font-family: moonbridge;
 
           &.title {
             width: 100%;
@@ -405,6 +460,178 @@ section {
         }
       }
     }
+
+    .project-item {
+      display: flex;
+      width: 100%;
+      margin-bottom: 60px;
+      margin-right: 20px;
+
+      img {
+        width: 122px;
+        height: 122px;
+        border-radius: 28px;
+        object-fit: cover;
+      }
+
+      .item-info {
+        flex: 1;
+        margin-left: 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 122px;
+        color: #fff;
+
+        .info-group {
+
+          display: flex;
+          flex-direction: column;
+
+          p {
+            margin: 0;
+
+            &.title {
+              font-size: 24px;
+              line-height: 1;
+              margin-bottom: 8px;
+              width: fit-content;
+              position: relative;
+            }
+
+            &.desc {
+              font-size: 14px;
+              width: fit-content;
+              max-width: 220px;
+              word-break: break-all;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+              overflow: hidden;
+              opacity: .5;
+            }
+          }
+
+        }
+
+        .action {
+          padding: 8px 24px;
+          display: flex;
+          background: #1C1C1F;
+          color: #fff;
+          font-size: 16px;
+          box-shadow: 0px 12px 12px -9px rgb(0 0 0 / 29%);
+          border-radius: 21px;
+          transition: ease-in-out 0.3s;
+          width: fit-content;
+          white-space: nowrap;
+          text-decoration: none;
+
+          &:hover {
+            cursor: pointer;
+            background: #4375ff;
+            box-shadow: 0px 12px 12px -9px rgb(5 51 137 / 29%);
+          }
+        }
+
+      }
+    }
+  }
+}
+
+#project {
+  .title {
+    color: #fff;
+  }
+
+  background: linear-gradient(135deg, #172231 0%, #7c808c 100%);
+}
+
+#skill {
+  background: linear-gradient(137deg, #172231 -11%, #0B1421 78%);
+
+  .title {
+    color: #fff;
+  }
+}
+
+#about {
+  background: url('../assets/imgs/bg.png') no-repeat center;
+  background-size: cover;
+  // background-color: linear-gradient(137deg, #172231 -11%, #0B1421 78%);
+  align-items: flex-start;
+  justify-content: space-between;
+  flex: 1;
+
+  .title {
+    color: #fff;
+  }
+
+  main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    .about-info {
+      margin-left: 100px;
+      color: #fff;
+      font-size: 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      flex-direction: column;
+      line-height: 48px;
+
+      p {
+        display: inline;
+      }
+
+      .name-title {
+        color: transparent;
+        background: linear-gradient(119deg, #fff -8%, #C2C4CC 12%, #fff 33%, #C2C4CC 57%, #BEC2C8 83%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 1;
+        margin: 0;
+        font-size: 60px;
+        font-weight: 600;
+        letter-spacing: 0px;
+        line-height: 88px;
+      }
+    }
+  }
+}
+
+footer {
+  padding: 60px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: #e1e3ea;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  scroll-snap-align: start;
+
+  .info {
+    font-size: 14px;
+    opacity: 0.6;
+    margin: 4px 0;
+    color: #333;
+
+    a {
+      text-decoration: none;
+      color: #333;
+      transition: ease-in-out 0.3s;
+
+      &:hover {
+        color: #000;
+      }
+    }
   }
 }
 
@@ -415,6 +642,142 @@ section {
 
   100% {
     transform: translateY(-5px);
+  }
+}
+
+@media screen and (max-width:768px) {
+  .container {
+    overflow-x: hidden;
+  }
+
+  .home-wrapper {
+    padding: 0 20px;
+
+    header {
+      height: 64px;
+
+      .menu {
+        padding: 0;
+        justify-content: center;
+      }
+    }
+
+    .info {
+      width: 100%;
+
+      .title {
+        font-size: 42px;
+        line-height: 1.5;
+      }
+
+      .desc {
+        width: 60%;
+        line-height: 1.5;
+        margin-top: 10px;
+      }
+    }
+
+    .top-bar {
+      width: 100vw;
+      height: 30px;
+      left: 20px;
+    }
+
+    .bottom-bar {
+      width: 100vw;
+      left: 10px;
+    }
+
+    .more {
+      right: 20px;
+      bottom: 20px;
+    }
+  }
+
+  section {
+    padding: 20px;
+    justify-content: space-between;
+
+    .scott-title {
+      margin-bottom: 0;
+      margin-top: 80px;
+    }
+
+    .section-info {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .skill-list {
+      grid-template-columns: repeat(3, 1fr);
+
+      &.project-list {
+        grid-template-columns: repeat(1, 1fr);
+      }
+
+      .fav-link {
+        margin-bottom: 10px;
+
+        .icon {
+          width: 60px;
+          height: 60px;
+          margin-bottom: 10px;
+        }
+
+        .info p {
+          margin: 0;
+        }
+      }
+
+      .project-item {
+        margin-bottom: 20px;
+
+        img {
+          width: 60px;
+          height: 60px;
+        }
+
+        .item-info {
+          margin-left: 10px;
+          height: 60px;
+          flex-direction: row;
+          align-items: center;
+
+          .info-group p.title {
+            font-size: 16px;
+          }
+
+          .action {
+            padding: 4px 12px;
+            font-size: 12px;
+            height: fit-content;
+          }
+        }
+      }
+
+    }
+
+  }
+
+  #about {
+    main .about-info {
+      margin-left: 0;
+      line-height: 36px;
+      font-size: 16px;
+
+      .name-title {
+        font-size: 40px;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  footer {
+    padding: 20px
   }
 }
 </style>
