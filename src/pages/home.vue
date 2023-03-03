@@ -818,11 +818,11 @@ footer {
   }
 }
 
-// @media (max-width:1040px) {
-//   .cursor {
-//     display: none
-//   }
-// }
+@media (max-width:1040px) {
+  .cursor {
+    display: none
+  }
+}
 
 [data-cursor] {
   cursor: pointer;
