@@ -10,10 +10,10 @@
           <li><a href="#about">关于我</a></li>
         </ul>
       </header>
-      <div class="info">
+      <a class="info">
         <p class="title">SCOTT STUDIO</p>
         <p class="desc">不知名前端攻城狮，分享编程经验和技术干货。</p>
-      </div>
+      </a>
       <a href="#skill" class="more">
         <!-- <div class="more"> -->
         <div class="text">SCROLL</div>
@@ -73,7 +73,7 @@
         <p class="title" data-text="ABOUT">关于我</p>
       </div>
       <main>
-        <div class="about-info">
+        <div class="about-info" data-cursor>
           <p>你好，很高兴认识你👋</p>
           <p class="name-title">我叫彭锐南 SCOTT</p>
           <p>是一名 前端攻城狮、独立开发者、博主。</p>
@@ -86,10 +86,21 @@
       <p class="info"><a
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36032102000025">赣ICP备19001528号-1</a> </p>
     </footer>
+
+    <div class="cursor" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { nextTick, onMounted } from 'vue';
+import Cursor from '../cursor'
+onMounted(() => {
+
+  nextTick(() => {
+    // eslint-disable-next-line no-new
+    Cursor(document.querySelector('.cursor'))
+  })
+})
 const skillList = [
   { title: "html", percent: 80, bg: "#e9572b" },
   { title: "css3", percent: 80, bg: "#2c51db" },
@@ -158,7 +169,7 @@ const projectList = [
 
   header {
     width: 100%;
-    height: 100px;
+    // height: 100px;
     position: fixed;
     font-family: 'moonbridge';
     top: 0;
@@ -175,16 +186,17 @@ const projectList = [
 
       li {
         list-style: none;
-        margin: 0 20px;
         cursor: pointer;
 
         a {
+          display: inline-block;
           font-weight: 400;
           letter-spacing: 0px;
           line-height: 0px;
+          padding: 40px 20px;
           color: #fff;
           text-decoration: none;
-          opacity: .5;
+          // opacity: .5;
           transition: .35s;
 
           &:hover {
@@ -203,6 +215,7 @@ const projectList = [
     align-items: center;
     flex-direction: column;
     z-index: 1;
+      cursor: pointer;
 
     .title {
       opacity: 1;
@@ -226,7 +239,6 @@ const projectList = [
       opacity: 1;
       margin-top: 20px;
       font-size: 18px;
-      font-weight: 400;
       letter-spacing: 0px;
       line-height: 0px;
       color: rgba(255, 255, 255, 0.8);
@@ -241,10 +253,11 @@ const projectList = [
   }
 
   .more {
-    bottom: 40px;
+    bottom: 20px;
     position: absolute;
-    right: 60px;
+    right: 40px;
     display: flex;
+    padding: 20px;
     font-family: moonbridge;
     font-size: 14px;
     font-weight: 400;
@@ -579,6 +592,7 @@ section {
       margin-left: 100px;
       color: #fff;
       font-size: 20px;
+      padding: 20px;
       display: flex;
       align-items: flex-start;
       justify-content: flex-start;
@@ -779,5 +793,38 @@ footer {
   footer {
     padding: 20px
   }
+}
+
+
+.cursor {
+  position: fixed;
+  z-index: 9999;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  will-change: all;
+  transform: scale(0);
+  top: 0;
+
+  &:before {
+    background: #000;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+// @media (max-width:1040px) {
+//   .cursor {
+//     display: none
+//   }
+// }
+
+[data-cursor] {
+  cursor: pointer;
 }
 </style>
