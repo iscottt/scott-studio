@@ -83,8 +83,8 @@
     </section>
     <footer>
       <p class="info">Copyright © 2022-2023 SCOTT-STUDIO 保留所有权利。</p>
-      <p class="info"><a
-          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=36032102000025">赣ICP备19001528号-1</a> </p>
+      <p class="info">备案号：<a
+          href="https://beian.miit.gov.cn/" target="_blank">赣ICP备19001528号-2</a> </p>
     </footer>
 
     <div class="cursor" />
